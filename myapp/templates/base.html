@@ -1,0 +1,230 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="fast2sms" content="S3hXJtVyKiVB6chPZoElmnlJRo6UdFKd">
+    <title>Shagun Vastraya - Sarees & Suits</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="{% static 'category.css' %}">
+    <link rel="stylesheet" href="{% static 'sidebar.css' %}">
+    {% block link %} {% endblock %}
+</head>
+<body>
+<!-- Top Header -->
+ <div class="container-fluid">
+<div class="bg-light border-bottom py-2">
+    <div class="row align-items-center text-center text-md-start">
+      <!-- Left Column -->
+      <div class="col-md-4 mb-2 mb-md-0">
+        <small class="text-muted">
+          👋 Welcome to <strong>Shagun Vashtralay</strong> – Traditional Wear for Every Occasion!
+        </small>
+      </div>
+
+      <!-- Center Column -->
+      <div class="col-md-4 mb-2 mb-md-0 text-md-center">
+        <small class="text-danger fw-semibold">
+          🚚 Free Shipping on Orders Over ₹999
+        </small>
+      </div>
+
+      <!-- Right Column -->
+      <div class="col-md-4 text-md-end">
+        <small class="me-3">
+          <i class="bi bi-envelope text-primary"></i> support@shagunvastraya.in
+        </small>
+        <small class="me-3">
+          <i class="bi bi-telephone text-success"></i> +91-9876543210
+        </small>
+        <a href="{% url 'login' %}" class="text-decoration-none me-2"><small>Login</small></a> |
+        <a href="{% url 'signup' %}" class="text-decoration-none ms-2"><small>Register</small></a>
+      </div>
+    </div>
+  </div>
+
+</div>
+    <!-- Top Navigation -->
+<header class="top-navbar sticky-top shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-maroon py-2">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+                <img src="{% static 'images/logo1.png' %}" alt="Logo" height="40" class="me-2">
+                <strong class="fs-5">Shagun Vastraya</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto text-center">
+                    <li class="nav-item"><a class="nav-link text-white" href="{% url 'index' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="{% url 'shop' %}">Shop</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link text-white dropdown-toggle" href="#" data-toggle="dropdown">Categories</a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{% url 'category_page' 'Silk' %}">Silk Sarees</a>
+                            <a class="dropdown-item" href="{% url 'category_page' 'Reshami' %}">Reshmi Sarees</a>
+                            <a class="dropdown-item" href="{% url 'category_page' 'Cotton' %}">Cotton Sarees</a>
+                            <a class="dropdown-item" href="{% url 'category_page' 'Banarasi' %}">Banarasi Sarees</a>
+                            <a class="dropdown-item" href="{% url 'category_page' 'Lakshmi Pati' %}">Lakshmi Pati</a>
+                            <a class="dropdown-item" href="{% url 'category_page' 'Ram Rashiya' %}">Ram Rashiya</a>
+                            <a class="dropdown-item" href="{% url 'category_page' 'Jag Damba' %}">Jag Damba</a>
+                            <a class="dropdown-item" href="{% url 'category_page' 'Ambika' %}">Ambika</a>
+                        </div>
+                    </li>
+                    <li class="nav-item"><a class="nav-link text-white" href="{% url 'category_page' 'Suit' %}">Suit</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="{% url 'about' %}">About</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="{% url 'contact' %}">Contact</a></li>
+                </ul>
+
+                <ul class="navbar-nav text-center">
+                    <!-- <li class="nav-item"><a class="nav-link text-white" href="#"><i class="fa fa-search"></i></a></li> -->
+
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{% url 'my_account' %}"><i class="fa fa-user"></i> {{ user.username }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{% url 'login' %}">Login</a>
+                        </li>
+                    {% endif %}
+
+                    <!-- <li class="nav-item"><a class="nav-link text-white" href="#"><i class="fa fa-heart"></i></a></li> -->
+                    <li class="nav-item"><a class="nav-link text-white" href="{% url 'cart' %}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert alert-dismissible fade show 
+                {% if message.tags == 'success' %}bg-maroon text-white
+                {% elif message.tags == 'error' %}alert-danger
+                {% elif message.tags == 'info' %}alert-info
+                {% else %}alert-secondary
+                {% endif %} mt-3" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+  <span aria-hidden="true">&times;</span>
+</button>
+    </div>
+  {% endfor %}
+{% endif %}
+
+
+{% block content %}      {% endblock %}
+
+ <!-- Footer Start -->
+<footer style="background-color: #800000;" class="text-white pt-5 pb-4">
+  <div class="container text-md-left">
+    <div class="row">
+
+      <!-- Logo & Description -->
+      <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+        <h3 class="text-uppercase mb-4 font-weight-bold text-warning">Shagun Vastraya</h3>
+        <!-- Example hero heading -->
+<h5 class="display-5 fw-bold">Elegance in Every Thread</h5>
+<p class="lead  text-white">Where tradition meets timeless style – Explore our exclusive Sarees & Suits.</p>
+
+      </div>
+
+ <!-- Quick Links -->
+<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+  <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Quick Links</h5>
+  <p><a href="{% url 'index' %}" class="text-white text-decoration-none">Home</a></p>
+  <p><a href="{% url 'shop' %}" class="text-white text-decoration-none">Shop</a></p>
+  <p><a href="{% url 'about' %}" class="text-white text-decoration-none">About Us</a></p>
+  <p><a href="{% url 'contact' %}" class="text-white text-decoration-none">Contact</a></p>
+</div>
+
+<!-- My Account -->
+<div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+  <h5 class="text-uppercase mb-4 font-weight-bold text-warning">My Account</h5>
+  {% if user.is_authenticated %}
+    <p><a href="{% url 'my_account' %}" class="text-white text-decoration-none">Dashboard</a></p>
+    <p><a href="{% url 'cart' %}" class="text-white text-decoration-none">My Cart</a></p>
+    <p><a href="{% url 'logout' %}" class="text-white text-decoration-none">Logout</a></p>
+  {% else %}
+    <p><a href="{% url 'login' %}" class="text-white text-decoration-none">Login</a></p>
+    <p><a href="{% url 'signup' %}" class="text-white text-decoration-none">Register</a></p>
+  {% endif %}
+</div>
+
+
+      <!-- Contact Info -->
+      <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+        <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Contact</h5>
+        <p><i class="fas fa-home me-2"></i> Keshavpur , Azamgaragh Road Jaunpur , Uttar Pradesh, India</p>
+        <p><i class="fas fa-envelope me-2 "></i>anilkm840@gmail.com</p>
+        <p><i class="fas fa-phone me-2"></i> +91 8808816542</p>
+        <p><i class="fas fa-print me-2"></i> +91 8318115992</p>
+      </div>
+
+      <!-- Find the Way (Map) -->
+      <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3 ">
+        <h5 class="text-uppercase mb-4 font-weight-bold text-warning">Find the Way</h5>
+        <div class="ratio ratio-16x9 rounded overflow-hidden">
+
+       <iframe src="https://www.google.com/maps/embed?pb=!4v1753603276930!6m8!1m7!1sWbwznbD-G9gxkcr60iV4cw!2m2!1d25.76222671235899!2d82.73114514497874!3f357.0584507024373!4f-10.168693613889616!5f2.532894456716806" width="600" height="180" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <hr class="mb-4">
+
+    <!-- Bottom Footer -->
+    <div class="row align-items-center">
+      <div class="col-md-7 col-lg-8">
+        <p class="mb-0">© 2025 <strong>Shagun Vastraya</strong> — All rights reserved.</p>
+      </div>
+      <div class="col-md-5 col-lg-4">
+        <div class="text-center text-md-end">
+          <ul class="list-unstyled list-inline mb-0">
+            <li class="list-inline-item"><a class="text-white" href="#"><i class="fab fa-facebook-f"></i></a></li>
+            <li class="list-inline-item"><a class="text-white" href="#"><i class="fab fa-twitter"></i></a></li>
+            <li class="list-inline-item"><a class="text-white" href="#"><i class="fab fa-instagram"></i></a></li>
+            <li class="list-inline-item"><a class="text-white" href="#"><i class="fab fa-youtube"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Footer End -->
+<!-- JS Files -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+     <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const alerts = document.querySelectorAll('.custom-alert');
+      alerts.forEach((alert, index) => {
+        setTimeout(() => {
+          alert.classList.add('show');
+        }, 100); // Start animation a bit after DOM load
+
+        setTimeout(() => {
+          alert.classList.remove('show');
+          alert.remove();
+        }, 5000); // Auto-hide after 5 seconds
+      });
+    });
+  </script>
+
+</body>
+</html>
