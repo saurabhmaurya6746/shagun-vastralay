@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .signup-container {
+        max-width: 450px;
+        margin: 60px auto;
+        padding: 30px;
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+
+    .signup-container img.logo {
+        width: 120px;
+        margin-bottom: 20px;
+    }
+
+    .signup-container h2 {
+        margin-bottom: 20px;
+        font-weight: 600;
+        color: #b30059;
+    }
+
+    .form-control {
+        border-radius: 10px;
+    }
+
+    .btn-signup {
+        background-color: #b30059;
+        border: none;
+        border-radius: 10px;
+    }
+
+    .btn-signup:hover {
+        background-color: #99004d;
+    }
+
+    .login-link {
+        margin-top: 15px;
+        font-size: 14px;
+    }
+
+    .login-link a {
+        color: #b30059;
+        text-decoration: none;
+    }
+
+    .login-link a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="signup-container">
+    <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo">
+    <h2>Create an Account</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3 text-start">
+            <label class="form-label">Username</label>
+            <input type="text" name="username" required class="form-control" >
+        </div>
+        <div class="mb-3 text-start">
+            <label class="form-label">Mobile</label>
+            <input type="text" name="mobile" required class="form-control">
+        </div>
+
+        <div class="mb-3 text-start">
+            <label class="form-label">Email</label>
+            <input type="email" name="email" required class="form-control">
+        </div>
+        <div class="mb-3 text-start">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" required class="form-control">
+        </div>
+        <div class="mb-3 text-start">
+            <label class="form-label">Confirm Password</label>
+            <input type="password" name="confirm_password" required class="form-control">
+        </div>
+        <button type="submit" class="btn btn-signup w-100 py-2">Sign Up</button>
+    </form>
+    <div class="login-link">
+        Already have an account? <a href="{% url 'login' %}">Login here</a>.
+    </div>
+</div>
+{% endblock %}

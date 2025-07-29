@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+ 
+{% block content %}
+<style>
+    .product-description{
+    margin-left: 25px;
+}
+</style>
+<div class="container py-5">
+    <h2 class="fw-bold mb-4">Your Cart</h2>
+
+    {% if cart_items %}
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Product</th>
+                    <th class="text-center">Quantity</th>
+                    <th class="text-end">Price</th>
+                    <th class="text-end">Subtotal</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in cart_items %}
+                {% with product=item.get_product %}
+                <tr>
+                    <td>
+                        <div class="d-flex align-items-center gap-3">
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}" width="70" class="rounded">
+                            <div class="product-description ">
+                                <h6 class="mb-1">{{ product.name }}</h6>
+                                <small class="text-muted">{{ product.fabric }} | {{ product.color }}</small>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="text-center">
+                        <form method="post" action="{% url 'update_cart' product.id %}">
+                            {% csrf_token %}
+                            <input type="number" name="quantity" value="{{ item.quantity }}" class="form-control form-control-sm w-50 mx-auto quantity-input" min="1">
+                        </form>
+                    </td>
+                    <td class="text-end unit-price">₹{{ product.price }}</td>
+                    <td class="text-end fw-semibold subtotal">₹{{ item.subtotal }}</td>
+                    <td class="text-end">
+                        <form method="post" action="{% url 'remove_from_cart' product.id %}">
+                            {% csrf_token %}
+                            <button class="btn btn-sm btn-danger">×</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endwith %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Cart Summary -->
+    <div class="d-flex justify-content-between align-items-center mt-4">
+        <a href="{% url 'index' %}" class="btn btn-outline-secondary">← Continue Shopping</a>
+        <div>
+            <h5>Total: <span id="cart-total">₹{{ total_price }}</span></h5>
+            <a href="{% url 'checkout' %}" class="btn btn-dark mt-2">Proceed to Checkout</a>
+        </div>
+    </div>
+
+    {% else %}
+    <div class="text-center">
+        <img src="{% static 'images/empty-cart.png' %}" alt="Empty Cart" class="img-fluid" style="max-width: 300px;">
+        <h5 class="mt-4 text-muted">Your cart is empty!</h5>
+        <a href="{% url 'index' %}" class="btn btn-primary mt-3">Shop Now</a>
+    </div>
+    {% endif %}
+</div>
+
+<!-- JavaScript for live subtotal & total update -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const quantityInputs = document.querySelectorAll('.quantity-input');
+
+    quantityInputs.forEach(input => {
+      input.addEventListener("input", function () {
+        const row = input.closest("tr");
+        const price = parseFloat(row.querySelector(".unit-price").innerText.replace('₹', ''));
+        const quantity = parseInt(input.value);
+        const subtotalCell = row.querySelector(".subtotal");
+
+        if (!isNaN(price) && !isNaN(quantity)) {
+          const subtotal = price * quantity;
+          subtotalCell.innerText = "₹" + subtotal.toFixed(2);
+        }
+
+        // Recalculate total
+        let newTotal = 0;
+        document.querySelectorAll(".subtotal").forEach(sub => {
+          const val = parseFloat(sub.innerText.replace('₹', ''));
+          if (!isNaN(val)) newTotal += val;
+        });
+
+        document.getElementById("cart-total").innerText = "₹" + newTotal.toFixed(2);
+      });
+    });
+  });
+</script>
+{% endblock %}

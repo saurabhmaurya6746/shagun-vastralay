@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'contact.css' %}">
+<style>
+    .contact-section {
+        background: linear-gradient(135deg, #f8f9fa, #ffffff);
+        border-radius: 10px;
+        padding: 40px;
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.07);
+    }
+
+    .contact-header-icon {
+        width: 60px;
+        margin-bottom: 10px;
+    }
+
+    .form-control:focus {
+        border-color: #343a40;
+        box-shadow: 0 0 0 0.1rem rgba(52, 58, 64, 0.25);
+    }
+
+    .contact-info h5 {
+        font-weight: 600;
+    }
+
+    .contact-info p {
+        margin-bottom: 10px;
+        color: #555;
+    }
+
+    .map-container iframe {
+        border-radius: 10px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    
+    <div class="text-center mb-5">
+        <img src="{% static 'images/contact-logo.png' %}" alt="Contact Icon" class="contact-header-icon">
+        <h2 class="fw-bold text-maroon">Get in Touch</h2>
+        <p class="text-muted">We'd love to hear from you. Whether you have a question about products, pricing, or anything else, our team is ready to answer all your questions.</p>
+    </div>
+
+    <div class="row contact-section">
+        <!-- Contact Form -->
+        <div class="col-md-6 mb-4 mb-md-0">
+            <h4 class="fw-bold mb-4 text-maroon">Send us a Message</h4>
+            <form method="POST" action="{% url 'contact' %}">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">Name</label>
+                    <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" name="email" class="form-control" placeholder="you@example.com" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Subject</label>
+                    <input type="text" name="subject" class="form-control" placeholder="Subject..." required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Message</label>
+                    <textarea name="message" rows="5" class="form-control" placeholder="Write your message..." required></textarea>
+                </div>
+                <button type="submit" class="btn btn-maroon btn-block">Send Message</button>
+            </form>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="col-md-6 contact-info">
+            <h4 class="fw-bold text-maroon mb-4">Contact Information</h4>
+            <p><strong>📍 Address:</strong> Shagun Vastraya, Fashion Street, Bhopal, India</p>
+            <p><strong>📧 Email:</strong> support@shagunvastraya.com</p>
+            <p><strong>📞 Phone:</strong> +91 9876543210</p>
+
+            <div class="map-container mt-4">
+                <iframe src="https://maps.google.com/maps?q=Bhopal&t=&z=13&ie=UTF8&iwloc=&output=embed" width="100%" height="220" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

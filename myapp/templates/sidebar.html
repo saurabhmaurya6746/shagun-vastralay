@@ -1,0 +1,127 @@
+{% load static %}
+{% load custom_filters %}
+{% load static %}
+{% load custom_filters %}
+
+<div class="sidebar">
+
+    <!-- 🔹 Popular Tags -->
+    <div class="mb-4">
+        <h5 class="fw-bold text-maroon">Popular Tags</h5>
+        <div class="d-flex flex-wrap gap-2">
+            <a href="?tag=kanjivaram" class="badge bg-maroon-light text-maroon border">Kanjivaram Saree</a>
+            <a href="?tag=kosa" class="badge bg-maroon-light text-maroon border">Kosa Saree</a>
+            <a href="?tag=tissue" class="badge bg-maroon-light text-maroon border">Tissue Saree</a>
+            <a href="?tag=zari" class="badge bg-maroon-light text-maroon border">Zari Work</a>
+            <a href="?tag=wedding" class="badge bg-maroon-light text-maroon border">Wedding Wear</a>
+        </div>
+    </div>
+
+    <!-- 🔍 Filter Form -->
+    <form method="get" id="filterForm">
+        <!-- Color -->
+        <div class="mb-3">
+            <label class="form-label fw-semibold text-maroon">Color</label>
+            {% for c in "red,green,blue"|split_by %}
+            <div class="form-check">
+                <input type="radio" class="form-check-input" name="color" id="color_{{ c }}" value="{{ c }}" {% if color == c %}checked{% endif %}>
+                <label class="form-check-label" for="color_{{ c }}">{{ c|title }}</label>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Price -->
+        <div class="mb-3">
+            <label class="form-label fw-semibold text-maroon">Price Range</label>
+            <div class="d-flex gap-2">
+                <input type="number" name="min_price" id="min_price" class="form-control form-control-sm border-maroon" placeholder="Min ₹" value="{{ min_price }}">
+                <input type="number" name="max_price" id="max_price" class="form-control form-control-sm border-maroon" placeholder="Max ₹" value="{{ max_price }}">
+            </div>
+        </div>
+
+        <!-- Fabric -->
+        <div class="mb-3">
+            <label class="form-label fw-semibold text-maroon">Fabric</label>
+            {% for f in "cotton,silk,chiffon"|split_by %}
+            <div class="form-check">
+                <input type="radio" class="form-check-input" name="fabric" id="fabric_{{ f }}" value="{{ f }}" {% if fabric == f %}checked{% endif %}>
+                <label class="form-check-label" for="fabric_{{ f }}">{{ f|title }}</label>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Hidden Inputs -->
+        <input type="hidden" name="sort" value="{{ sort }}">
+        <input type="hidden" name="show" value="{{ show }}">
+
+        <!-- Filter Button -->
+        <div id="filterButtonArea">
+            {% if color or fabric or min_price or max_price %}
+            <a href="{% url 'category_page' category_slug %}" class="btn btn-outline-danger btn-sm w-100 mt-2" id="removeBtn">Remove Filters</a>
+            {% else %}
+            <button type="submit" class="btn btn-maroon btn-sm w-100 mt-2" id="applyBtn">Apply Filters</button>
+            {% endif %}
+        </div>
+    </form>
+
+    <!-- 🔹 Best Sellers -->
+    <div class="mt-4">
+        <h5 class="fw-bold text-maroon">Best Sellers</h5>
+        <div class="d-flex mb-3">
+            <img src="{% static 'images/red_silk.png' %}" alt="Product 1" width="60" class="me-2 rounded">
+            <div class="mx-3">
+                <p class="mb-1 small">Red Silk Saree</p>
+                <strong>₹1,499</strong>
+            </div>
+        </div>
+        <div class="d-flex mb-3">
+            <img src="{% static 'images/blue_banarasi.png' %}" alt="Product 2" width="60" class="me-2 rounded">
+            <div class="mx-3">
+                <p class="mb-1 small">Blue Banarasi Saree</p>
+                <strong>₹1,999</strong>
+            </div>
+        </div>
+        <div class="d-flex">
+            <img src="{% static 'images/green_saree.jpeg' %}" alt="Product 3" width="60" class="me-2 rounded">
+            <div class="mx-3">
+                <p class="mb-1 small">Green Cotton Saree</p>
+                <strong>₹899</strong>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ✅ JavaScript to toggle filter button -->
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const form = document.getElementById('filterForm');
+    const removeBtn = document.getElementById('removeBtn');
+    const applyBtnHTML = '<button type="submit" class="btn btn-dark btn-sm w-100 mt-2" id="applyBtn">Apply Filters</button>';
+
+    const initialState = new FormData(form);
+
+    form.addEventListener('change', function () {
+        const currentState = new FormData(form);
+        let changed = false;
+
+        for (const [key, value] of currentState.entries()) {
+            if (initialState.get(key) !== value) {
+                changed = true;
+                break;
+            }
+        }
+
+        const btnArea = document.getElementById('filterButtonArea');
+        if (changed) {
+            btnArea.innerHTML = applyBtnHTML;
+        } else{
+            btnArea.innerHTML = `
+                <a href="/category/${categoryName}/" class="btn btn-outline-danger btn-sm w-100 mt-2" id="removeBtn">
+                    Remove Filters
+                </a>
+            `;
+        }
+    });
+});
+</script>

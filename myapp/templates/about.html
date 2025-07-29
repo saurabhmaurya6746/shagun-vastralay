@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<!-- Hero Section -->
+<section class="about-hero text-white d-flex align-items-center">
+    <div class="container text-center">
+        <h1 class="display-4 fw-bold">About Shagun Vastraya</h1>
+        <p class="lead">Where Tradition Meets Elegance</p>
+    </div>
+</section>
+
+<!-- About Info -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <img src="{% static 'images/about.png' %}" alt="Store" class="img-fluid rounded shadow">
+            </div>
+            <div class="col-md-6">
+                <h2 class="fw-bold text-maroon">Our Story</h2>
+                <p>
+                    At <strong>Shagun Vastraya</strong>, we believe every outfit should tell a story.
+                    From our small but passionate shop in Jaunpur, we bring you hand-picked sarees and suits that blend cultural heritage with a modern touch.
+                    Trusted by local customers for quality, design, and heartfelt service.
+                </p>
+                <p class="text-muted small">
+                    <strong>Address:</strong> Keshavpur, Azamgarh Road, Jaunpur, Uttar Pradesh, India<br>
+                    <strong>Phone:</strong> +91 8808816542, +91 8318115992<br>
+                    <strong>Email:</strong> anilkm840@gmail.com<br>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Sarees -->
+<section class="py-5 bg-white">
+    <div class="container">
+        <h2 class="fw-bold mb-4 text-center text-maroon">Featured Sarees</h2>
+        <div class="row g-4">
+            {% for saree in sarees %}
+            <div class="col-md-3">
+                <div class="card h-100 border-0 shadow-sm">
+                    <a href="{% url 'product_detail' saree.id %}">
+                        <div class="ratio ratio-1x1">
+                            <img src="{{ saree.image.url }}" class="img-fluid object-fit-cover rounded-top" alt="{{ saree.name }}">
+                        </div>
+                    </a>
+
+                    <div class="card-body text-center">
+                        <h6 class="mb-1">{{ saree.name }}</h6>
+                        <p class="text-maroon fw-semibold mb-1">₹{{ saree.price }}</p>
+                        {% if user.is_authenticated %}
+                        <form method="POST" action="{% url 'add_to_cart' 'saree' saree.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-outline-maroon">🛒 Add to cart</button>
+                        </form>
+                        {% else %}
+                        <a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-sm btn-outline-primary">🛒 Add to cart</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+ 
+{% endblock %}

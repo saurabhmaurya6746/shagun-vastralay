@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-4">Our Collection</h2>
+
+        <div class="row g-4" id="product-list">
+            {% for product in products %}
+            <div class="col-sm-6 col-md-4 col-lg-3">
+                <div class="card h-100 border-0 shadow-sm">
+                    <a href="{% url 'product_detail' product.id %}">
+                        <div class="ratio ratio-1x1">
+                            <img src="{{ product.image.url }}" class="img-fluid object-fit-cover" alt="{{ product.name }}">
+                        </div>
+                    </a>
+                    <div class="card-body text-center">
+                        <h6 class="card-title mb-1">
+                            <a href="{% url 'product_detail' product.id %}" class="text-decoration-none text-dark">
+                                {{ product.name }}
+                            </a>
+                        </h6>
+                        <p class="text-primary fw-semibold mb-1">₹{{ product.price }}</p>
+                        <div class="text-warning small mb-2">★★★★★</div>
+
+                        {% if user.is_authenticated %}
+                        <form action="{% url 'add_to_cart' product.category_slug product.id %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm btn-outline-maroon">🛒 Add to cart</button>
+                        </form>
+                        {% else %}
+                        <a href="{% url 'login' %}?next={{ request.path }}" class="btn btn-sm btn-outline-primary">🍪 Add to cart</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div id="loading" class="text-center py-4" style="display: none;">
+            <strong>Loading more products...</strong>
+        </div>
+    </div>
+</section>
+
+<script>
+    let page = 2;
+    let loading = false;
+    window.addEventListener('scroll', () => {
+        if (loading) return;
+
+        if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 300) {
+            loading = true;
+            document.getElementById("loading").style.display = "block";
+
+            fetch(`?page=${page}`, {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                const container = document.getElementById("product-list");
+                data.products.forEach(p => {
+                    container.innerHTML += `
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <a href="/product/${p.id}/">
+                                    <img src="${p.image_url}" class="card-img-top">
+                                </a>
+                                <div class="card-body text-center">
+                                    <h6 class="card-title mb-1">
+                                        <a href="/product/${p.id}/" class="text-decoration-none text-dark">
+                                            ${p.name}
+                                        </a>
+                                    </h6>
+                                    <p class="text-primary fw-semibold mb-1">₹${p.price}</p>
+                                    <div class="text-warning small mb-2">★★★★★</div>
+                                    <a href="/login/" class="btn btn-sm btn-outline-primary">🛒 Add to cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                if (data.products.length > 0) {
+                    page += 1;
+                    loading = false;
+                    document.getElementById("loading").style.display = "none";
+                } else {
+                    document.getElementById("loading").innerHTML = "<em>No more products to show</em>";
+                }
+            });
+        }
+    });
+</script>
+{% endblock %}

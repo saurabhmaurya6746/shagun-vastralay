@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .login-container {
+        max-width: 400px;
+        margin: 60px auto;
+        padding: 30px;
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+
+    .login-container img.logo {
+        width: 120px;
+        margin-bottom: 20px;
+    }
+
+    .login-container h2 {
+        margin-bottom: 20px;
+        font-weight: 600;
+        color: #b30059;
+    }
+
+    .form-control {
+        border-radius: 10px;
+    }
+
+    .btn-login {
+        background-color: #b30059;
+        border: none;
+        border-radius: 10px;
+    }
+
+    .btn-login:hover {
+        background-color: #99004d;
+    }
+
+    .signup-link {
+        margin-top: 15px;
+        font-size: 14px;
+    }
+
+    .signup-link a {
+        color: #b30059;
+        text-decoration: none;
+    }
+
+    .signup-link a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class="login-container">
+    <img src="{% static 'images/logo.png' %}" alt="Logo" class="logo">
+    <h2>Welcome Back</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3 text-start">
+            <label class="form-label">Username</label>
+            <input type="text" name="username" required class="form-control">
+        </div>
+        <div class="mb-3 text-start">
+            <label class="form-label">Password</label>
+            <input type="password" name="password" required class="form-control">
+        </div>
+        <p class="mt-2">
+    <a href="{% url 'password_reset' %}" class="text-muted small">Forgot your password?</a>
+</p>
+
+        <button type="submit" class="btn btn-login w-100 py-2">Login</button>
+    </form>
+    <div class="signup-link">
+        Don’t have an account? <a href="{% url 'signup' %}">Sign up here</a>.
+    </div>
+</div>
+{% endblock %}
