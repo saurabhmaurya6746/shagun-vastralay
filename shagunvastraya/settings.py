@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-2uz9d4)@@yaesqn8=n-@5a*a(mnadm^fdq1ea+=(=69qked51=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://shagun-vastralay-1.onrender.com','loacalhost']
+ALLOWED_HOSTS = ['shagun-vastralay-1.onrender.com','loacalhost']
 
 
 # Application definition
@@ -139,3 +139,4 @@ EMAIL_HOST_USER = 'saurabhmaurya6746@gmail.com'
 EMAIL_HOST_PASSWORD = 'lshc homc yndc prhs' 
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
