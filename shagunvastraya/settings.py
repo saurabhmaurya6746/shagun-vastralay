@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'myapp.middleware.NoCacheMiddleware',
@@ -139,4 +140,5 @@ EMAIL_HOST_USER = 'saurabhmaurya6746@gmail.com'
 EMAIL_HOST_PASSWORD = 'lshc homc yndc prhs' 
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
 
