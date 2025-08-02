@@ -2,7 +2,6 @@ from django.conf import settings
 from django.contrib import messages
 from django.http import HttpResponseNotAllowed
 from django.shortcuts import render, redirect
-import requests
 from .models import CartItem, Category, ContactMessage, Saree, Comment
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
@@ -417,4 +416,5 @@ def subscribe_newsletter(request):
                 messages.info(request, 'You are already subscribed.')
         else:
             messages.error(request, 'Please enter a valid email.')
+
     return redirect(request.META.get('HTTP_REFERER', '/'))
