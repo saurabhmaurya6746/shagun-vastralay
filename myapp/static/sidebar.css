@@ -1,0 +1,84 @@
+.sidebar {
+    padding-right: 10px;
+    border-right: 1px solid #ddd;
+}
+
+.sidebar h5 {
+    margin-bottom: 10px;
+}
+ .sidebar {
+    background-color: #f2f7f0;  /* Soft green shade like in your screenshot */
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #dcdcdc;
+    margin-bottom: 30px;
+}
+
+.sidebar h5 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+.sidebar .form-check {
+    margin-bottom: 8px;
+}
+
+.sidebar .form-label {
+    margin-bottom: 6px;
+    font-size: 0.95rem;
+}
+
+.sidebar input[type="number"] {
+    width: 100%;
+}
+
+.sidebar .badge {
+    background-color: #fff;
+    border: 1px solid #ced4da;
+    font-size: 0.75rem;
+    padding: 6px 10px;
+    cursor: pointer;
+}
+
+.sidebar .badge:hover {
+    background-color: #dee2e6;
+}
+
+.sidebar .bestsellers {
+    margin-top: 25px;
+}
+
+.sidebar .bestsellers img {
+    border: 1px solid #ccc;
+}
+
+.sidebar .bestsellers .small {
+    font-size: 0.85rem;
+}
+
+.sidebar strong {
+    font-size: 0.9rem;
+    color: #444;
+}
+
+
+/* Maroon theme */
+.text-maroon {
+  color: #800000;
+}
+.bg-maroon-light {
+  background-color: #fbe9e9;
+}
+.btn-maroon {
+  background-color: #800000;
+  color: white;
+  border: none;
+}
+.btn-maroon:hover {
+  background-color: #660000;
+  color: white;
+}
+.border-maroon {
+  border: 1px solid #800000;
+}

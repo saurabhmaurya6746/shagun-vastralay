@@ -1,0 +1,212 @@
+a:hover {
+  color: #d63384 !important;
+}
+
+
+ .navbar-brand img {
+            height: 65px;
+            margin-right: 10px;
+            mix-blend-mode: multiply;
+                /* filter: brightness(4.2); */
+
+        }
+        .navbar {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .nav-item .nav-link {
+            padding: 10px 15px;
+            font-weight: 500;
+            color: #333;
+        }
+        .nav-item .nav-link:hover {
+            color: #c0392b;
+        }
+  .custom-alert {
+      position: fixed;
+      top: 20px;
+      left: -100%;
+      width: auto;
+      max-width: 400px;
+      z-index: 9999;
+      transition: left 0.6s ease-in-out;
+    }
+    .custom-alert.show {
+      left: 20px;
+    }
+ 
+ .hero-banner {
+    background: url('/static/images/18.png') no-repeat center center/cover;
+    height: 90vh;
+    position: relative;
+    color: white;
+    align-items: center;
+    display: flex;
+  }
+
+  .hero-banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+
+  .hero-banner .container {
+    position: relative;
+    z-index: 2;
+  }
+
+  .btn-maroon {
+    background-color: #a1004b;
+    color: #fff;
+    border: 1px solid #a1004b;
+  }
+
+  .btn-maroon:hover {
+    background-color: #87003d;
+    border-color: #87003d;
+    color: #fff;
+  }
+
+  @media (max-width: 768px) {
+    .hero-banner {
+      height: 60vh;
+      text-align: center;
+    }
+
+    .hero-banner .container {
+      justify-content: center !important;
+    }
+  }
+.bg-maroon {
+    background-color: #800000 !important;
+}
+ 
+
+.logo-text {
+    font-size: 1.3rem;
+}
+
+@media (max-width: 576px) {
+    .logo-text {
+        font-size: 1rem;
+    }
+}
+
+.feature-icons .icon-box {
+  background: #fff;
+  border-radius: 8px;
+  padding: 20px 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-icons .icon-box:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.feature-icons i {
+  color: #ffc107; /* Bootstrap warning color */
+}
+
+
+.product-card {
+    border: none;
+    transition: 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+}
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+.product-card img {
+    height: 250px;
+    object-fit: cover;
+}
+.text-maroon {
+  color: #800000;
+}
+
+.btn-maroon {
+  background-color: #800000;
+  color: #fff;
+  border: none;
+  transition: 0.3s ease;
+}
+
+.btn-maroon:hover {
+  background-color: #660000;
+  color: #fff;
+}
+
+.product-card img {
+  height: 250px;
+  object-fit: cover;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.promo-banner {
+  height: 250px;
+  border-radius: 10px;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease;
+}
+
+.promo-banner:hover {
+  transform: scale(1.02);
+}
+
+.promo1 {
+  background-image: url('/static/images/promo1.png');
+}
+
+.promo2 {
+  background-image: url('/static/images/1.png');
+}
+
+/* Maroon Button */
+.btn-maroon {
+  background-color: #800000;
+  color: #fff;
+  border: none;
+  padding: 6px 16px;
+  font-weight: 500;
+}
+
+.btn-maroon:hover {
+  background-color: #660000;
+  color: #fff;
+}
+
+
+.newsletter input.form-control {
+    padding: 0.75rem 1rem;
+    border-radius: 30px;
+    width: 300px;
+    border: 1px solid #ddd;
+}
+.newsletter button.btn {
+    border-radius: 30px;
+    padding: 0.7rem 1.5rem;
+}
+
+.testimonials{
+    background-color: aqua;
+}
+.testimonials .carousel-item {
+  padding: 30px;
+}
+.testimonials img {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-size: 20px;
+    width: 40px;
+    height: 40px;
+}
+

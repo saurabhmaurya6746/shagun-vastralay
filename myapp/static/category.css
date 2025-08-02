@@ -1,0 +1,71 @@
+.hero-banner {
+    height: 30vh;
+    background-image: url('/static/images/banner3.png');
+    background-size: cover;
+    background-position: center;
+    min-height: 300px;
+}
+
+.category-offer-banner {
+    height: 250px;
+    background-image: url('/static/images/hero-bg.jpg.png');  /* adjust path if needed */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.category-offer-banner .overlay {
+    background-color: rgba(0, 0, 0, 0.5);  /* dark overlay */
+    border-radius: 8px;
+}
+
+
+
+.card-title {
+    font-size: 0.95rem;
+    min-height: 45px;
+}
+
+.star-rating {
+    color: #f39c12;
+    letter-spacing: 1px;
+}
+.category-offer-banner{
+    background: url('/static/images/18.png') no-repeat center center/cover;
+}
+.card-img-top {
+    height: 250px;
+    object-fit: cover;
+}
+
+.card-title {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.star-rating {
+    color: #ffc107;
+    letter-spacing: 1px;
+}
+
+.text-maroon {
+    color: #800000 !important;
+}
+.bg-maroon {
+    background-color: #800000 !important;
+    color: #fff;
+}
+.btn-outline-maroon {
+    border: 1px solid #800000;
+    color: #800000;
+}
+.btn-outline-maroon:hover {
+    background-color: #800000;
+    color: #fff;
+}
+.border-maroon {
+    border-color: #800000 !important;
+}
