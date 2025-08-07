@@ -19,39 +19,37 @@
     {% block link %} {% endblock %}
 </head>
 <body>
-<!-- Top Header -->
- <div class="container-fluid">
-<div class="bg-light border-bottom py-2">
-    <div class="row align-items-center text-center text-md-start">
-      <!-- Left Column -->
-      <div class="col-md-4 mb-2 mb-md-0">
-        <small class="text-muted">
-          👋 Welcome to <strong>Shagun Vashtralay</strong> – Traditional Wear for Every Occasion!
-        </small>
-      </div>
+    <!-- Top Header -->
+<div class="container-fluid d-none d-lg-block"> 
+  <div class="bg-light border-bottom py-2"> 
+    <div class="row align-items-center text-center text-md-start"> 
+      
+      <!-- Left Column --> 
+      <div class="col-md-4 mb-2 mb-md-0 d-none d-md-block"> 
+        <small class="text-muted"> 👋 Welcome to <strong>Shagun Vashtralay</strong> – Traditional Wear for Every Occasion! </small> 
+      </div> 
+      
+      <!-- Center Column --> 
+      <div class="col-md-4 mb-2 mb-md-0 text-md-center"> 
+        <small class="text-danger fw-semibold"> 🚚 Free Shipping on Orders Over ₹999 </small> 
+      </div> 
+      
+      <!-- Right Column --> 
+      <div class="col-md-4 text-md-end"> 
+        <small class="me-3"> 
+          <i class="bi bi-envelope text-primary"></i> anilkm840@gmail.com
+        </small> 
+        <small class="me-3"> 
+          <i class="bi bi-telephone text-success"></i> +91-8808816542 
+        </small> 
+        <a href="{% url 'login' %}" class="text-decoration-none me-2"><small>Login</small></a> | 
+        <a href="{% url 'signup' %}" class="text-decoration-none ms-2"><small>Register</small></a> 
+      </div> 
 
-      <!-- Center Column -->
-      <div class="col-md-4 mb-2 mb-md-0 text-md-center">
-        <small class="text-danger fw-semibold">
-          🚚 Free Shipping on Orders Over ₹999
-        </small>
-      </div>
-
-      <!-- Right Column -->
-      <div class="col-md-4 text-md-end">
-        <small class="me-3">
-          <i class="bi bi-envelope text-primary"></i> support@shagunvastraya.in
-        </small>
-        <small class="me-3">
-          <i class="bi bi-telephone text-success"></i> +91-9876543210
-        </small>
-        <a href="{% url 'login' %}" class="text-decoration-none me-2"><small>Login</small></a> |
-        <a href="{% url 'signup' %}" class="text-decoration-none ms-2"><small>Register</small></a>
-      </div>
-    </div>
-  </div>
-
+    </div> 
+  </div> 
 </div>
+
     <!-- Top Navigation -->
 <header class="top-navbar sticky-top shadow-sm">
     <nav class="navbar navbar-expand-lg navbar-dark bg-maroon py-2">
